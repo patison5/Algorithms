@@ -2,6 +2,16 @@
 
 class Solution(object):
     def firstUniqChar(self, s):
+        for char in s:
+            if s.rindex(char) == s.index(char):
+                return s.index(char)
+        return -1
+
+
+# Another variant with dictionary
+
+class Solution(object):
+    def firstUniqChar(self, s):
         dict = {}
         for char in s:
             if char not in dict:
