@@ -1,6 +1,6 @@
 # 26. [Easy] Remove Duplicates from Sorted Array
 
-def removeDuplicates(self, nums):
+def removeDuplicates(nums):
     """
     :type nums: List[int]
     :rtype: int
