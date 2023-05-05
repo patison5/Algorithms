@@ -1,6 +1,8 @@
 # 695. [Medium] Max Area of Island 
 
-# You are given an m x n binary matrix grid. An island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
+# You are given an m x n binary matrix grid. An island is a group of 1's (representing land) 
+# connected 4-directionally (horizontal or vertical.) You may assume all four edges of the 
+# grid are surrounded by water.
 # The area of an island is the number of cells with a value 1 in the island.
 # Return the maximum area of an island in grid. If there is no island, return 0.
 
@@ -41,7 +43,7 @@ def is_position_land(grid: TIntGrid, col: int, row: int) -> bool:
 def create_default_visited_grid(size_x, size_y):
     for i in range(0, size_x):
         already_visited_grid.append([])
-        for j in range(0, size_y):
+        for _ in range(0, size_y):
             already_visited_grid[i].append(False)
 
 def is_valid(grid: TIntGrid, col: int, row: int) -> bool:
@@ -72,9 +74,12 @@ def bfs(grid: TIntGrid, col: int, row: int) -> int:
         for element in available_range:
             col_index = element[0]
             row_index = element[1]
-            if not is_valid(grid, col_index, row_index): continue
-            if not is_position_land(grid, col_index, row_index): continue
-            if already_visited_grid[col_index][row_index]: continue
+            if not is_valid(grid, col_index, row_index): 
+                continue
+            if not is_position_land(grid, col_index, row_index): 
+                continue
+            if already_visited_grid[col_index][row_index]: 
+                continue
             newLand = Land(row_index, col_index)
             already_visited_grid[col_index][row_index] = True
             landsQueue.append(newLand)
@@ -100,7 +105,8 @@ def maxAreaOfIsland(grid: TIntGrid) -> int:
             is_land = is_position_land(grid, column_index, row_index)
             if is_land:
                 amount = bfs(grid, column_index, row_index)
-                if result_amount < amount: result_amount = amount
+                if result_amount < amount: 
+                    result_amount = amount
                 print(amount)
 
     return result_amount
@@ -118,7 +124,14 @@ class Test(NamedTuple):
 
 tests: list[Test] = [
     Test([[0,1,1,0], [0,1,1,0], [1,0,1,0], [1,0,0,0], [1,0,1,1]], 5),
-    Test([[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]], 6),
+    Test([[0,0,1,0,0,0,0,1,0,0,0,0,0],
+        [0,0,0,0,0,0,0,1,1,1,0,0,0],
+        [0,1,1,0,1,0,0,0,0,0,0,0,0],
+        [0,1,0,0,1,1,0,0,1,0,1,0,0],
+        [0,1,0,0,1,1,0,0,1,1,1,0,0],
+        [0,0,0,0,0,0,0,0,0,0,1,0,0],
+        [0,0,0,0,0,0,0,1,1,1,0,0,0],
+        [0,0,0,0,0,0,0,1,1,0,0,0,0]], 6),
     Test([[0,0,0,0,0,0,0,0]], 0),
     Test([[1,1,0,1,1],[1,0,0,0,0],[0,0,0,0,1],[1,1,0,1,1]], 3)
 ]
