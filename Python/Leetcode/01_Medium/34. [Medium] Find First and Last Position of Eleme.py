@@ -46,3 +46,6 @@ print(solution.searchRange([5,7,7,8,8,10], 6)) # [-1, -1]
 print(solution.searchRange([], 6)) # [3, 4]]
 print(solution.searchRange([2, 2], 3))
 print(solution.searchRange([2,2], 2)) # [0,1]
+
+
+print(len([1,2]))
