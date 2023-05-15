@@ -2,31 +2,54 @@
 
 class Solution:
     def searchMatrix(self, matrix: list[list[int]], target: int) -> bool:
+
+        if not matrix or len(matrix) == 0 or len(matrix[0]) == 0:
+            return False
+
         col = 0
         row = len(matrix[0]) - 1
-        print(col, row, len(matrix), len(matrix[0]))
-        while row and col < len(matrix) - 1:
-            matrix_element = matrix[col][row]
-            print(matrix_element)
-            if target == matrix[col][row]:
+
+        while row >= 0 and col <= len(matrix) - 1:
+            current_element = matrix[col][row]
+            if target == current_element:
                 return True
-            if target < matrix_element:
+            if target < current_element:
                 row -= 1
             else:
                 col += 1
 
-        print(col, row)
-        print(matrix[1][0])
+        return False
 
-        if not col and row:
-            while row:
-                if matrix[col][row] == target:
-                    return True
-                row -= 1
-        return matrix[col][row] == target
 
+
+
+from typing import NamedTuple
+
+class Test(NamedTuple):
+    input1: list[list]
+    input2: int
+    result: int
+
+tests = [
+    Test([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3, True),
+    Test([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 13, False),
+    Test([[1],[3]], 3, True),
+    Test([[1],[3]], 0, False),
+    Test([[1]], 1, True),
+    Test([[]], 1, False),
+    Test([[1,3,5,7],[10,11,16,20],[23,30,34,50]], 23, True)
+]
 
 solution = Solution()
-# print(solution.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3))
 
-print(solution.searchMatrix([[1],[3]], 3))
+for test in tests:
+
+    print("------")
+    result = solution.searchMatrix(test.input1, test.input2)
+    isPassed = result == test.result
+    if (isPassed):
+        print("Passed")
+    else:
+        print(test.input1, test.input2)
+        print("Not passed. Exprected: ", test.result, " recieved: ", result) 
+        print("\n------")
